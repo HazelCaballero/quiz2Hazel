@@ -4,7 +4,9 @@ class Game:
     def __init__(self, player_name):
         self.player_name = player_name 
         self.playing = False  
-        self.alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"  
+        self.alphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+        self.encryption_count = 0  # Contador de cifrado
+        self.decryption_count = 0  # Contador de descifrado
         
     #Funcion de encriptacion, se inicia el mensaje vacio, se cambia a mayusculas para evaluarlo 
     #para cada letra en el mensaje si esta en la variable alphabet se le tiene una variable con 
@@ -21,6 +23,7 @@ class Game:
                 encrypted_message += self.alphabet[encrypted_index]  
             else:
                 encrypted_message += caracter
+        self.encryption_count += 1  # Incrementar el contador de cifrado
         return encrypted_message  
 
     #Similar a la funcion anterior pero retrocede en el desplazamiento
@@ -33,8 +36,15 @@ class Game:
                 original_index = (encrypted_index - displacement) % len(self.alphabet)
                 message_decrypted += self.alphabet[original_index]
             else:
-                message_decrypted += caracter 
+                message_decrypted += caracter
+        self.decryption_count += 1  # Incrementar el contador de descifrado
         return message_decrypted
+
+
+    def show_statistics(self):
+        print(f"\nEstadísticas:")
+        print(f"Total de mensajes cifrados: {self.encryption_count}")
+        print(f"Total de mensajes descifrados: {self.decryption_count}")
 
     #Funcion de iniciar juego, variable si es playing true significa que se ejecuto e inicio del juego 
     #se tienen la opcion de elgir si cifrar o decifrar, y el desplazamiento puede ser ingresado por 
@@ -42,26 +52,42 @@ class Game:
     def start_game(self):
         self.playing = True  
         print(f"\n¡Bienvenido al juego, {self.player_name}!🎲")
-        print("El juego ha comenzado\n")
-        print("1. Cifrar mensaje")
-        print("2. Descifrar mensaje")
-        choice = input("Seleciona una opción: ")
-        message = input("\nEscribe el mensaje: ").upper()  
-        while True:
-            try:
-                displacement = int(input("Escribe el número de desplazamiento (ej: 2): "))
-                break  
-            except ValueError:
-                print("Por favor, ingresa un número válido.")  
-        if choice == "1":
-            result = self.encryption_cesar(message, displacement)
-            print(f"\nMensaje cifrado: {result}")
-        elif choice == "2":
-            result = self.desencryption_cesar(message, displacement)
-            print(f"\nMensaje descifrado: {result}")
-        else:
-            print("Opción inválida. Volviendo al menú.")
-        print("\n¡Gracias por jugar!\n")
+        
+        while self.playing:
+            print("\nEl juego ha comenzado\n")
+            print("1. Cifrar mensaje")
+            print("2. Descifrar mensaje")
+            print("3. Ver estadísticas")
+            print("4. Salir del juego")
+            choice = input("Seleciona una opción: ")
+            
+            if choice == "1":
+                message = input("\nEscribe el mensaje: ").upper()
+                while True:
+                    try:
+                        displacement = int(input("Escribe el número de desplazamiento (ej: 2): "))
+                        break  
+                    except ValueError:
+                        print("Por favor, ingresa un número válido.")  
+                result = self.encryption_cesar(message, displacement)
+                print(f"\nMensaje cifrado: {result}")
+            elif choice == "2":
+                message = input("\nEscribe el mensaje cifrado: ").upper()
+                while True:
+                    try:
+                        displacement = int(input("Escribe el número de desplazamiento (ej: 2): "))
+                        break  
+                    except ValueError:
+                        print("Por favor, ingresa un número válido.")  
+                result = self.desencryption_cesar(message, displacement)
+                print(f"\nMensaje descifrado: {result}")
+            elif choice == "3":
+                self.show_statistics()
+            elif choice == "4":
+                print("\n¡Gracias por jugar!\n")
+                self.playing = False
+            else:
+                print("Opción inválida. Volviendo al menú.")
 
     def go_out(self):
         print(f"\nHasta luego, {self.player_name}. ¡Vuelve pronto!")

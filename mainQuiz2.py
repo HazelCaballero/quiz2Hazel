@@ -4,7 +4,7 @@ from Quiz2hazelP import Game
 #Funcion para el menu
 def show_menu():
     print("=== MENÚ PRINCIPAL ===")
-    print("1. Iniciar game")   
+    print("1. Iniciar juego")   
     print("2. Salir")        
     print("======================")
 
