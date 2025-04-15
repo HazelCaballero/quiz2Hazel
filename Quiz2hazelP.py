@@ -41,7 +41,7 @@ class Game:
     #el usuario, da resultado y vuelve al menu y esta la funcion para terminar el juego que es usada en el main
     def start_game(self):
         self.playing = True  
-        print(f"\n¡Bienvenido al juego, {self.player_name}!")
+        print(f"\n¡Bienvenido al juego, {self.player_name}!🎲")
         print("El juego ha comenzado\n")
         print("1. Cifrar mensaje")
         print("2. Descifrar mensaje")

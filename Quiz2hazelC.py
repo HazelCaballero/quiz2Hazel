@@ -28,7 +28,7 @@ class Game:
     #se termina el juego y luego la funcion para salir que se llama en el main
     def start_game(self):
         self.playing = True
-        print(f"\n¡Bienvenido al juego, {self.player_name}!")
+        print(f"\n¡Bienvenido al juego, {self.player_name}!🎲")
         print("El juego ha comenzado\n")
         entrada = input("Ingresa una lista de números separados por comas (ej: 5,2,9,1): ")
         try:
