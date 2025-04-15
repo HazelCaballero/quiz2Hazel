@@ -5,7 +5,7 @@ class Game:
     def __init__(self, player_name):
         self.player_name = player_name  
         self.playing = False  
-        self.arrangements_count = 0  # Contador de descifrado                
+        self.arrangements_count = 0  # Contador de ordenamientos               
     
     #Funcion de ordenamiento, se inicia el tamaño de la lista y se le asigna el valor de la 
     #longitud de la lista se hace un ciclo for que va desde 0 hasta el tamaño de la lista, 
